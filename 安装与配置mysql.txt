@@ -43,5 +43,8 @@ mysql5.7之后mysql.user表里的password字段已经换成authentication_string
 8、登录mysql
 > mysql -u root -p，回车输入密码
 
-9、配置环境变量
+9、登录之后修改root账号密码
+mysql> set password=password('newpassword');
+
+10、配置环境变量
 系统变量->path->编辑，在文本框的最末尾输入D:\MySql\mysql-5.7.12-winx64\bin;
