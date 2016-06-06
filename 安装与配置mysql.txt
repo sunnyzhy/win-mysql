@@ -3,7 +3,7 @@
 2、下载ZIP Archive版（免安装），在本地新建MySql文件夹，解压mysql-5.7.12-winx64.zip到该目录下。
 
 3、配置my.ini
-在mysql-5.7.12-winx64.zip目录下，新建my.ini。复制下面的代码保存，my.ini会替换掉下面的my-default.ini文件。basedir和datadir的路径是解压后的安装路径。
+在mysql-5.7.12-winx64目录下新建my.ini,复制下面的代码保存，my.ini会替换掉下面的my-default.ini文件。basedir和datadir的路径是解压后的本地路径。
 [mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8 
