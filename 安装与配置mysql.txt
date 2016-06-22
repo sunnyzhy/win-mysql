@@ -50,5 +50,5 @@ mysql> set password=password('newpassword');
 系统变量->path->编辑，在文本框的最末尾输入D:\MySql\mysql-5.7.12-winx64\bin;
 
 11、允许远程连接mysql
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip' IDENTIFIED BY 'password' WITH GRANT OPTION;
-mysql> flush privileges;
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;   --%为不限制连接的IP
+mysql> flush privileges;  --设置立即生效
