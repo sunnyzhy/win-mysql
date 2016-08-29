@@ -1,0 +1,40 @@
+1.修改主配置文件my.ini：
+[mysqld]
+server-id=200 #取本机ip的末端即可
+binlog-do-db=my_sys #要同步的数据库
+#binlog-ignore-db=mysql   #不同步的数据库,如果指定了binlog-do-db这里应该可以不用指定的
+log-bin=mysql-bin #要生成的二进制日记文件名称
+
+2.在主库添加用户并授权：
+mysql> use mysql;
+mysql> create user 'username'@'slave ip' identified by 'password';
+mysql> grant replication slave on *.* to 'username'@'slave ip';
+
+3.记录主库file和position字段对应的值：
+mysql> show master status;
+file value | position value
+
+4.修改从配置文件my.ini：
+[mysqld]
+server-id=210
+replicate-do-db=my_sys
+log-bin=mysql-bin
+
+5.配置从库连接主库所需的信息：
+mysql> change master to master_host='master ip',master_port=3306,master_user='username',master_password='password',master_log_file='file value',master_log_pos=position value;
+
+6.查看从库状态：
+mysql> show slave status\G;
+如果显示以下内容，则配置成功：
+Slave_IO_Running: Yes  #连接到主库，并读取主库的日志到本地，生成本地日志文件
+Slave_SQL_Running: Yes #读取本地日志文件，并执行日志里的SQL命令
+
+7.从库开启同步功能：
+mysql> start slave;
+
+8.在主库执行CRUD操作，在从库查看同步结果
+
+注意：
+    * 主从库间的数据不是实时同步的。 
+    * 如果主从库之间的网络断开，则从库会在网络正常后批量同步。 
+    * 如果在从库修改数据，就很可能造成从库在执行主库的bin-log时出现错误而停止同步，一般不建议在从库进行CRUD操作。
