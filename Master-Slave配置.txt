@@ -9,6 +9,11 @@ log-bin=mysql-bin #要生成的二进制日记文件名称
 mysql> use mysql;
 mysql> create user 'username'@'slave ip' identified by 'password';
 mysql> grant replication slave on *.* to 'username'@'slave ip';
+删除用户及授权：
+mysql> revoke all on *.* from username@slave ip; #删除授权
+mysql> use mysql;
+mysql> delete from user where user='username' and host='slave ip' ; #删除用户
+mysql> flush privileges; #刷新
 
 3.记录主库file和position字段对应的值：
 mysql> show master status;
