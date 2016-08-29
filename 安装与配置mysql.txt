@@ -1,8 +1,8 @@
-1、http://dev.mysql.com/downloads/mysql/
+1.http://dev.mysql.com/downloads/mysql/
 
-2、下载ZIP Archive版（免安装），在本地新建MySql文件夹，解压mysql-5.7.12-winx64.zip到该目录下。
+2.下载ZIP Archive版（免安装），在本地新建MySql文件夹，解压mysql-5.7.12-winx64.zip到该目录下。
 
-3、配置my.ini
+3.配置my.ini
 在mysql-5.7.12-winx64目录下新建my.ini,复制下面的代码保存，my.ini会替换掉下面的my-default.ini文件。basedir和datadir的路径是解压后的本地路径。
 [mysql]
 # 设置mysql客户端默认字符集
@@ -21,18 +21,18 @@ character-set-server=utf8
 # 创建新表时将使用的默认存储引擎
 default-storage-engine=INNODB 
 
-4、初始化data目录
+4.初始化data目录
 打开cmd，进入mysql解压后的bin目录；
 > mysqld --initialize，成功之后会在mysql-5.7.12-winx64目录下新建一个data文件夹，里面有mysql、performance_schema、sys目录以及其他文件
 
-5、安装mysql服务
+5.安装mysql服务
 > mysqld install
 
-6、启动mysql服务
+6.启动mysql服务
 > net start mysql
 > sc delete mysql，卸载服务
 
-7、重置root账号密码
+7.重置root账号密码
 在my.ini文件中的[mysqld]下面一行添加skip_grant_tables，然后重启mysql服务；
 > mysql -u root -p，不用输入密码直接回车进入mysql；
 mysql> use mysql;
@@ -40,20 +40,20 @@ mysql> UPDATE user SET authentication_string=PASSWORD('newpassword') where USER=
 mysql5.7之后mysql.user表里的password字段已经换成authentication_string了；
 注释my.ini文件中的skip_grant_tables，重启mysql服务。
 
-8、登录mysql
+8.登录mysql
 > mysql -u root -p，回车输入密码
 
-9、登录之后修改root账号密码
+9.登录之后修改root账号密码
 mysql> set password=password('newpassword');
 
-10、配置环境变量
+10.配置环境变量
 系统变量->path->编辑，在文本框的最末尾输入D:\MySql\mysql-5.7.12-winx64\bin;
 
-11、允许远程连接mysql
+11.允许远程连接mysql
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;   --%为不限制连接的IP
 mysql> flush privileges;  --设置立即生效
 
 
 *mysql常见问题解决：
-1、运行cmd安装mysql服务时出现Install/Remove of the Service Denied!
+1.运行cmd安装mysql服务时出现Install/Remove of the Service Denied!
 解决办法：以管理员身份运行cmd
