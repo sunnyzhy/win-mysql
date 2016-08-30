@@ -10,6 +10,7 @@ log-bin=mysql-bin #开启二进制日志，这一点决定了数据同步的成�
 mysql> use mysql;
 mysql> create user 'username'@'slave ip' identified by 'password';
 mysql> grant replication slave on *.* to 'username'@'slave ip';
+mysql> select * from user where user = 'username' \G; #Repl_slave_priv项的值为Y
 删除用户及授权：
 mysql> revoke all on *.* from username@slave ip; #删除授权
 mysql> use mysql;
